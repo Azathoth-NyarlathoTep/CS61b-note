@@ -69,7 +69,7 @@ public class Repository {
         }
         Commit cm = Commit.fromFile(getBranchFile());
 
-        if (cm.getFileMap() != null && cm.getFileMap().containsKey(fileName)) {
+        if (cm.getFileMap() != null && cm.getFileMap().containsKey(fileName)) { //case 1
             Stage stage = Stage.fromFile(INDEX_FILE);
             String target = makeBlobId(fileName);
             Blob blob = new Blob(fileName);
@@ -84,7 +84,7 @@ public class Repository {
                 createObjectFile(target, blob);
                 stage.addAndSave(fileName, target);
             }
-        } else {
+        } else { //case 2
             String blobID = makeBlobId(fileName);
             Blob blob = new Blob(fileName);
             Stage stage = Stage.fromFile(INDEX_FILE);
